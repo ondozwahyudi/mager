@@ -1,78 +1,94 @@
-@extends('layouts.app')
+<!DOCTYPE html>
+<html lang="en">
 
-@section('content')
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">{{ __('Login') }}</div>
+<head>
+    <meta charset="UTF-8">
+    <title>Dore jQuery</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 
-                <div class="card-body">
-                    <form method="POST" action="{{ route('login') }}">
-                        @csrf
+    <link rel="stylesheet" href="{{ asset('') }}/font/iconsmind/style.css" />
+    <link rel="stylesheet" href="{{ asset('') }}/font/simple-line-icons/css/simple-line-icons.css" />
 
-                        <div class="form-group row">
-                            <label for="email" class="col-md-4 col-form-label text-md-right">{{ __('E-Mail Address') }}</label>
+    <link rel="stylesheet" href="{{ asset('') }}/css/vendor/bootstrap.min.css" />
+    <link rel="stylesheet" href="{{ asset('') }}/css/vendor/bootstrap-float-label.min.css" />
+    <link rel="stylesheet" href="{{ asset('') }}/css/main.css" />
+    <script src='https://www.google.com/recaptcha/api.js'></script>
+</head>
 
-                            <div class="col-md-6">
-                                <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>
-
-                                @error('email')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
-                        </div>
-
-                        <div class="form-group row">
-                            <label for="password" class="col-md-4 col-form-label text-md-right">{{ __('Password') }}</label>
-
-                            <div class="col-md-6">
-                                <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="current-password">
-
-                                @error('password')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
-                        </div>
-
-                        <div class="form-group row">
-                            <div class="col-md-6 offset-md-4">
-                                <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}>
-
-                                    <label class="form-check-label" for="remember">
-                                        {{ __('Remember Me') }}
-                                    </label>
+<body class="background show-spinner">
+    <div class="fixed-background"></div>
+    <main>
+        <div class="container">
+            <div class="row h-100">
+                <div class="col-12 col-md-10 mx-auto my-auto">
+                    <div class="card auth-card" style="border-radius: 10px">
+                        <div class="position-relative image-side" style="border-radius: 9px">
+                            <p class=" text-white h2">MAGER CLASS</p>
+                            <p class="white mb-5">
+                                Belum memiliki akun? Jadilah bagian dari kami
+                            </p>
+                            <button type="button" style="border-radius: 5px" class="btn btn-block default btn-sm btn-primary mb-3">Daftar Sekarang</button>
+                            <p class="white mb-2">
+                            atau Masuk Dengan
+                            </p>
+                            <div class="row d-flex justify-content-between align-items-center">
+                                <div class="col-md-6">
+                                <a href="{{ route('login.provider', 'google') }}" style="border-radius: 5px"  class="btn default btn-block btn-light btn-shadow btn-xs "><img src="https://img.icons8.com/color/20/000000/google-logo.png"/>
+                                    {{ __(' Google') }}</a>
                                 </div>
+                                <div class="col-md-6">
+                                    <a href="{{ route('login.provider', 'github') }}" style="border-radius: 5px"  class="btn default btn-block btn-light btn-shadow btn-xs "><img src="https://img.icons8.com/ios-glyphs/20/000000/github.png"/>
+                                        {{ __(' GitHub') }}</a>
+                                    </div>
                             </div>
                         </div>
+                        <div class="form-side">
+                            <a href="Dashboard.Default.html">
+                                <span class="logo-single"></span>
+                            </a>
+                            <h6 class="mb-4">Login</h6>
+                            <form method="post" action="{{ route('login') }}">
+                                @csrf
+                                <label class="form-group has-float-label mb-4">
+                                    <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>
+                                    <span>E-mail</span>
+                                </label>
+                                @error('email')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                                @enderror
 
-                        <div class="form-group row mb-0">
-                            <div class="col-md-8 offset-md-4">
-                                <button type="submit" class="btn btn-primary">
-                                    {{ __('Login') }}
-                                </button>
-                                <!-- TAMBAHKAN LINE INI -->
-                                <a href="{{ route('login.provider', 'google') }}" class="btn btn-danger">{{ __('Google Sign in') }}</a>
-                                {{-- <a href="{{ route('login.provider', 'facebook') }}" class="btn btn-primary">{{ __('Facebook Sign in') }}</a> --}}
-                                <!-- TAMBAHKAN LINE INI -->
+                                <label class="form-group has-float-label mb-4">
+                                    <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="current-password">
+                                    <span>Password</span>
+                                </label>
+                                @error('password')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                                @enderror
 
+                                <div class="row d-flex justify-content-between align-items-center mb-4">
+                                    <div class="col-md-7">
+                                        <a href="{{ route('password.request') }}">Lupa Password?</a>
+                                    </div>
+                                    <div class="col-md-5 text-right">
+                                        <button class="btn btn-primary btn-sm btn-block btn-shadow" type="submit">LOGIN</button>
+                                    </div>
+                                </div>
 
-                                @if (Route::has('password.request'))
-                                    <a class="btn btn-link" href="{{ route('password.request') }}">
-                                        {{ __('Forgot Your Password?') }}
-                                    </a>
-                                @endif
-                            </div>
+                            </form>
                         </div>
-                    </form>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-</div>
-@endsection
+    </main>
+    <script src="{{ asset('') }}/js/vendor/jquery-3.3.1.min.js"></script>
+    <script src="{{ asset('') }}/js/vendor/bootstrap.bundle.min.js"></script>
+    <script src="{{ asset('') }}/js/dore.script.js"></script>
+    <script src="{{ asset('') }}/js/scripts.js"></script>
+</body>
+
+</html>
