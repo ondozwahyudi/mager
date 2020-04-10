@@ -17,8 +17,10 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Auth::routes();
+Auth::routes(['verify' => true]);
 
-Route::get('/home', 'HomeController@index')->name('home');
 Route::get('redirect/{driver}', 'Auth\LoginController@redirectToProvider')->name('login.provider');
 Route::get('{driver}/callback', 'Auth\LoginController@handleProviderCallback')->name('login.callback');
+Route::group(['middleware' => ['verified']], function () {
+    Route::get('/home', 'HomeController@index')->name('home');
+});

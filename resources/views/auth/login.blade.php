@@ -27,7 +27,7 @@
                             <p class="white mb-5">
                                 Belum memiliki akun? Jadilah bagian dari kami
                             </p>
-                            <button type="button" style="border-radius: 5px" class="btn btn-block default btn-sm btn-primary mb-3">Daftar Sekarang</button>
+                            <a type="button" href="{{route('register')}}" style="border-radius: 5px" class="btn btn-block default btn-sm btn-primary mb-3">Daftar Sekarang</a>
                             <p class="white mb-2">
                             atau Masuk Dengan
                             </p>
