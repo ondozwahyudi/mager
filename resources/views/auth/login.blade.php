@@ -1,94 +1,95 @@
-<!DOCTYPE html>
-<html lang="en">
+@extends('layouts.layouts_auth')
 
-<head>
-    <meta charset="UTF-8">
-    <title>Dore jQuery</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+@section('content')
+    <div class="kt-grid kt-grid--ver kt-grid--root">
+        <div class="kt-grid kt-grid--hor kt-grid--root  kt-login kt-login--v6 kt-login--signin" id="kt_login">
+            <div class="kt-grid__item kt-grid__item--fluid kt-grid kt-grid--desktop kt-grid--ver-desktop kt-grid--hor-tablet-and-mobile">
+                <div class="kt-grid__item  kt-grid__item--order-tablet-and-mobile-2  kt-grid kt-grid--hor kt-login__aside">
 
-    <link rel="stylesheet" href="{{ asset('') }}/font/iconsmind/style.css" />
-    <link rel="stylesheet" href="{{ asset('') }}/font/simple-line-icons/css/simple-line-icons.css" />
-
-    <link rel="stylesheet" href="{{ asset('') }}/css/vendor/bootstrap.min.css" />
-    <link rel="stylesheet" href="{{ asset('') }}/css/vendor/bootstrap-float-label.min.css" />
-    <link rel="stylesheet" href="{{ asset('') }}/css/main.css" />
-    <script src='https://www.google.com/recaptcha/api.js'></script>
-</head>
-
-<body class="background show-spinner">
-    <div class="fixed-background"></div>
-    <main>
-        <div class="container">
-            <div class="row h-100">
-                <div class="col-12 col-md-10 mx-auto my-auto">
-                    <div class="card auth-card" style="border-radius: 10px">
-                        <div class="position-relative image-side" style="border-radius: 9px">
-                            <p class=" text-white h2">MAGER CLASS</p>
-                            <p class="white mb-5">
-                                Belum memiliki akun? Jadilah bagian dari kami
-                            </p>
-                            <a type="button" href="{{route('register')}}" style="border-radius: 5px" class="btn btn-block default btn-sm btn-primary mb-3">Daftar Sekarang</a>
-                            <p class="white mb-2">
-                            atau Masuk Dengan
-                            </p>
-                            <div class="row d-flex justify-content-between align-items-center">
-                                <div class="col-md-6">
-                                <a href="{{ route('login.provider', 'google') }}" style="border-radius: 5px"  class="btn default btn-block btn-light btn-shadow btn-xs "><img src="https://img.icons8.com/color/20/000000/google-logo.png"/>
-                                    {{ __(' Google') }}</a>
+                    <div class="kt-login__wrapper">
+                        <div class="kt-login__container">
+                            <div class="kt-login__body">
+                                <div class="kt-login__logo">
+                                    <a href="#">
+                                        <img src="./assets/media/company-logos/logo-2.png">
+                                    </a>
                                 </div>
-                                <div class="col-md-6">
-                                    <a href="{{ route('login.provider', 'github') }}" style="border-radius: 5px"  class="btn default btn-block btn-light btn-shadow btn-xs "><img src="https://img.icons8.com/ios-glyphs/20/000000/github.png"/>
-                                        {{ __(' GitHub') }}</a>
+                                <div class="kt-login__signin">
+                                    <div class="kt-login__head">
+                                        <h3 class="kt-login__title">Sign In To Mager</h3>
                                     </div>
+                                    <div class="kt-login__form">
+                                        <form class="kt-form" method="post" action="{{ route('login') }}">
+                                            @csrf
+                                            <div class="form-group">
+                                                <input class="form-control  @error('email') is-invalid @enderror" type="text" placeholder="Email" name="email" value="{{ old('email') }}" autocomplete="on">
+                                            </div>
+                                            @error('email')
+                                                <strong>{{ $message }}</strong>
+                                            @enderror
+
+                                            <div class="form-group">
+                                                <input class="form-control @error('password') is-invalid @enderror"  type="password" placeholder="Password" name="password">
+                                            </div>
+                                            @error('password')
+                                                <strong>{{ $message }}</strong>
+                                            @enderror
+                                            <div class="kt-login__extra">
+                                                <label class="kt-checkbox">
+                                                    <input type="checkbox" name="remember"> Remember me
+                                                    <span></span>
+                                                </label>
+                                                <a href="{{route('password.request')}}" >Forget Password ?</a>
+                                            </div>
+                                            <div class="kt-login__actions">
+                                                <button type="submit"  class="btn btn-brand btn-pill btn-elevate">Sign In</button>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                                <div class="kt-login__divider">
+                                    <div class="kt-divider">
+                                        <span></span>
+                                        <span>OR</span>
+                                        <span></span>
+                                    </div>
+                                </div>
+
+                                <div class="kt-login__options">
+                                    <div class="row d-flex justify-content-between align-items-center">
+                                        <div class="col-md-6 d-flex">
+                                        <a href="{{ route('login.provider', 'google') }}" style="border-radius: 5px;  margin-bottom: 10px;"  class="btn btn-block btn-outline-secondary  btn-xs "><img src="https://img.icons8.com/color/20/000000/google-logo.png"/>
+                                            {{ __(' Google') }}</a>
+                                        </div>
+                                        <div class="col-md-6 d-flex">
+                                        <a href="{{ route('login.provider', 'github') }}" style="border-radius: 5px;margin-bottom: 10px;"  class="btn btn-block btn-outline-secondary btn-xs"><img src="https://img.icons8.com/ios-glyphs/20/000000/github.png"/>
+                                                {{ __(' GitHub') }}</a>
+                                        </div>
+                                    </div>
+
+                                </div>
                             </div>
                         </div>
-                        <div class="form-side">
-                            <a href="Dashboard.Default.html">
-                                <span class="logo-single"></span>
-                            </a>
-                            <h6 class="mb-4">Login</h6>
-                            <form method="post" action="{{ route('login') }}">
-                                @csrf
-                                <label class="form-group has-float-label mb-4">
-                                    <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>
-                                    <span>E-mail</span>
-                                </label>
-                                @error('email')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                                @enderror
-
-                                <label class="form-group has-float-label mb-4">
-                                    <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="current-password">
-                                    <span>Password</span>
-                                </label>
-                                @error('password')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                                @enderror
-
-                                <div class="row d-flex justify-content-between align-items-center mb-4">
-                                    <div class="col-md-7">
-                                        <a href="{{ route('password.request') }}">Lupa Password?</a>
-                                    </div>
-                                    <div class="col-md-5 text-right">
-                                        <button class="btn btn-primary btn-sm btn-block btn-shadow" type="submit">LOGIN</button>
-                                    </div>
-                                </div>
-
-                            </form>
+                        <div class="kt-login__account">
+                            <span class="kt-login__account-msg">
+                                Don't have an account yet ?
+                            </span>&nbsp;&nbsp;
+                            <a href="{{route('register')}}" class="kt-login__account-link">Sign Up!</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="kt-grid__item kt-grid__item--fluid kt-grid__item--center kt-grid kt-grid--ver kt-login__content" style="background-image: url(./assets/media//bg/bg-4.jpg);">
+                    <div class="kt-login__section">
+                        <div class="kt-login__block">
+                            <h3 class="kt-login__title">Join Our Community</h3>
+                            <div class="kt-login__desc">
+                                Lorem ipsum dolor sit amet, coectetuer adipiscing
+                                <br>elit sed diam nonummy et nibh euismod
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    </main>
-    <script src="{{ asset('') }}/js/vendor/jquery-3.3.1.min.js"></script>
-    <script src="{{ asset('') }}/js/vendor/bootstrap.bundle.min.js"></script>
-    <script src="{{ asset('') }}/js/dore.script.js"></script>
-    <script src="{{ asset('') }}/js/scripts.js"></script>
-</body>
-
-</html>
+    </div>
+@endsection
