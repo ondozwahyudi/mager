@@ -43,16 +43,20 @@
                                             <input id="name" type="name" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" required placeholder="Name Full"autofocus>
                                         </div>
                                         @error('name')
-                                        <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
-                                        </span>
                                         @enderror
                                         <div class="form-group">
                                             <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required placeholder="Email" autofocus>
                                         </div>
+                                        @error('email')
+                                            <strong>{{ $message }}</strong>
+                                        @enderror
                                         <div class="form-group">
-                                            <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" password="password" value="{{ old('password') }}" required placeholder="Password" autocomplete="password" autofocus>
+                                            <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" password="password"  required placeholder="Password" autocomplete="password" autofocus>
                                         </div>
+                                        @error('password')
+                                            <strong>{{ $message }}</strong>
+                                        @enderror
                                         <div class="form-group">
                                             <input class="form-control form-control-last" type="password" placeholder="Confirm Password" id="password_confirmation" name="password_confirmation">
                                         </div>
