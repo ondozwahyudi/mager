@@ -9,12 +9,12 @@
                     <div class="kt-login__wrapper">
                         <div class="kt-login__container">
                             <div class="kt-login__body">
-                                <div class="kt-login__logo">
+                                <div class="kt-login__logo" style="margin:0;">
                                     <a href="#">
                                         <img src="./assets/media/company-logos/logo-2.png">
                                     </a>
                                 </div>
-                                <div class="kt-login__signin">
+                                <div class="kt-login__signin" >
                                     <div class="kt-login__head">
                                         <h3 class="kt-login__title">Sign In To Mager</h3>
                                     </div>

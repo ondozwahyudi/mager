@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Kelas;
 use Illuminate\Http\Request;
+use App\User;
 
 class HomeController extends Controller
 {
@@ -23,6 +25,15 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+        $kelas = self::guru();
+        return view('home', compact('kelas'));
+    }
+
+    protected function guru()
+    {
+        $kelas = User::where('id', auth()->user()->id)->with(['kelas' => function ($query) {
+            return $query->with('user')->get();
+        }])->get();
+        return $kelas;
     }
 }

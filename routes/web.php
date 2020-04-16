@@ -17,15 +17,13 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/test/test', function () {
-    return view('test/test/index');
-});
 
 
 Auth::routes();
+Route::get('/test', 'testController@test');
 
 Route::get('redirect/{driver}', 'Auth\LoginController@redirectToProvider')->name('login.provider');
 Route::get('{driver}/callback', 'Auth\LoginController@handleProviderCallback')->name('login.callback');
+Route::get('/home', 'HomeController@index')->name('home');
 Route::group(['middleware' => ['verified']], function () {
-    Route::get('/home', 'HomeController@index')->name('home');
 });

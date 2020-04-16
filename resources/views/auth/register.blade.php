@@ -52,22 +52,16 @@
                                             <strong>{{ $message }}</strong>
                                         @enderror
                                         <div class="form-group">
-                                            <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" password="password"  required placeholder="Password" autocomplete="password" autofocus>
+                                            <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="new-password" placeholder="Password">
                                         </div>
                                         @error('password')
                                             <strong>{{ $message }}</strong>
                                         @enderror
                                         <div class="form-group">
-                                            <input class="form-control form-control-last" type="password" placeholder="Confirm Password" id="password_confirmation" name="password_confirmation">
-                                        </div>
-                                        <div class="kt-login__extra">
-                                            <label class="kt-checkbox">
-                                                <input type="checkbox" name="agree"> I Agree the <a href="#">terms and conditions</a>.
-                                                <span></span>
-                                            </label>
+                                            <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password" placeholder="Confirm Password">
                                         </div>
                                         <div class="kt-login__actions">
-                                            <button id="kt_login_signup_submit" class="btn btn-brand btn-pill btn-elevate signup">Sign Up</button>
+                                            <button type="submit"class="btn btn-brand btn-pill btn-elevate signup">Sign Up</button>
                                             <a href="{{route('login')}}" class="btn btn-outline-brand btn-pill">Cancel</a>
                                         </div>
                                     </form>
