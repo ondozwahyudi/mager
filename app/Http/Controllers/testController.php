@@ -11,14 +11,15 @@ class testController extends Controller
 {
     public function test()
     {
-
         $kelas = User::where('id', auth()->user()->id)->with(['kelas' => function ($query) {
             return $query->with('user')->get();
         }])->get();
-
-        foreach ($kelas as $val) {
-            foreach ($val->kelas as $kls) {
-                return $kls;
+        foreach ($kelas as $kls) {
+            foreach ($kls->kelas as $value) {
+                if ($value->user->status == 0) {
+                    # code...
+                    return $value->user->count();
+                }
             }
         }
     }

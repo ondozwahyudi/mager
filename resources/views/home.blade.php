@@ -28,12 +28,10 @@
                             <form method="get" class="kt-quick-search__form">
                                 <div class="input-group">
                                     <div class="input-group-prepend"><span class="input-group-text"><i class="flaticon2-search-1"></i></span></div>
-                                    <input type="text" class="form-control kt-quick-search__input" placeholder="Search...">
+                                    <input type="text" id="myInput" class="form-control kt-quick-search__input" placeholder="Search...">
                                     <div class="input-group-append"><span class="input-group-text"><i class="la la-close kt-quick-search__close"></i></span></div>
                                 </div>
                             </form>
-                            <div class="kt-quick-search__wrapper kt-scroll" data-scroll="true" data-height="300" data-mobile-height="200">
-                            </div>
                         </div>
                     </div>
                 </div>
@@ -80,17 +78,16 @@
 
     <!-- begin:: Content -->
     <div class="kt-content  kt-grid__item kt-grid__item--fluid" id="kt_content">
-        <div class="row">
+        <div class="row" id="myCard">
             @foreach ($kelas as $kls )
             {{-- @foreach ($kls as $item) --}}
             @foreach ($kls->kelas as $value)
-                <div class="col-lg-3">
+                <div class="col-lg-3" id="myBody" >
                     <!--begin:: Widgets/Blog-->
-                    <div class="kt-portlet kt-portlet--height-fluid kt-widget19">
+                    <div class="kt-portlet kt-portlet--height-fluid kt-widget19" id="">
                         <div class="kt-portlet__body kt-portlet__body--fit kt-portlet__body--unfill">
                             <div class="kt-widget19__pic kt-portlet-fit--top kt-portlet-fit--sides" style="min-height: 150px; background-image: url(./assets/media//products/product4.jpg)">
                                 <h3 class="kt-widget19__title kt-font-light">
-
                                 </h3>
                                 <div class="kt-widget19__shadow"></div>
                                 <div class="kt-widget19__labels">
@@ -109,29 +106,30 @@
                                             {{$value->created_by}}
                                         </a>
                                         <span class="kt-widget19__time">
-                                            UX/UI Designer, Google
+                                           {{$value->mapel}}
                                         </span>
                                     </div>
                                     <div class="kt-widget19__stats">
                                         <span class="kt-widget19__number kt-font-brand">
-                                                {{$value->user->count()}}
+                                            {{$value->user->count()}}
                                         </span>
-                                                <a href="#" class="kt-widget19__comment">
-                                                    Siswa
-                                                </a>
-                                            </div>
-                                        </div>
-                                        <div class="kt-widget19__text">
-                                        </div>
-                                    </div>
-                                    <div class="kt-widget19__action">
-                                        <a href="#" class="btn btn-sm btn-label-brand btn-bold">Lihat Kelas</a>
+                                        <a href="#" class="kt-widget19__comment">
+                                            Siswa
+                                        </a>
                                     </div>
                                 </div>
+                                <div class="kt-widget19__text">
+                                </div>
+                            </div>
+                            <div class="kt-widget19__action">
+                                <a href="{{route('home.show',  $value->uuid)}}" class="btn btn-sm btn-label-brand btn-bold">Lihat Kelas</a>
                             </div>
                         </div>
-                        {{-- @endforeach --}}
-                        @endforeach
+                    </div>
+                </div>
+
+                    {{-- @endforeach --}}
+             @endforeach
             @endforeach
         </div>
     </div>
@@ -171,4 +169,16 @@
     </div>
 
 </div>
+@endsection
+@section('js')
+    <script>
+        $(document).ready(function(){
+            $("#myInput").on("keyup", function() {
+                var value = $(this).val().toLowerCase();
+                $("#myCard #myBody ").filter(function() {
+                $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+                });
+            });
+        });
+    </script>
 @endsection

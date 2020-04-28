@@ -36,4 +36,17 @@ class HomeController extends Controller
         }])->get();
         return $kelas;
     }
+
+    public function show($uuid)
+    {
+        $kelas = User::where('id', auth()->user()->id)->with(['kelas' => function ($query) use ($uuid) {
+            return $query->where('uuid', $uuid)->with('user')->get();
+        }])->get();
+        return $kelas[0]->kelas;
+    }
+
+    public function add(request $request)
+    {
+        # code...
+    }
 }

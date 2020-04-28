@@ -12,13 +12,13 @@ class UsersTableSeeder extends Seeder
      */
     public function run()
     {
-        
+
 
         \DB::table('users')->delete();
-        
-        \DB::table('users')->insert(array (
-            0 => 
-            array (
+
+        \DB::table('users')->insert(array(
+            0 =>
+            array(
                 'id' => 1,
                 'socialite_id' => '112321729882406935267',
                 'socialite_name' => 'google',
@@ -31,8 +31,8 @@ class UsersTableSeeder extends Seeder
                 'created_at' => '2020-04-15 21:44:38',
                 'updated_at' => '2020-04-15 21:44:38',
             ),
-            1 => 
-            array (
+            1 =>
+            array(
                 'id' => 2,
                 'socialite_id' => NULL,
                 'socialite_name' => NULL,
@@ -45,8 +45,8 @@ class UsersTableSeeder extends Seeder
                 'created_at' => '2020-04-16 00:55:57',
                 'updated_at' => '2020-04-16 00:55:57',
             ),
-            2 => 
-            array (
+            2 =>
+            array(
                 'id' => 3,
                 'socialite_id' => NULL,
                 'socialite_name' => NULL,
@@ -59,8 +59,8 @@ class UsersTableSeeder extends Seeder
                 'created_at' => '2020-04-16 00:55:58',
                 'updated_at' => '2020-04-16 00:55:58',
             ),
-            3 => 
-            array (
+            3 =>
+            array(
                 'id' => 4,
                 'socialite_id' => NULL,
                 'socialite_name' => NULL,
@@ -73,8 +73,8 @@ class UsersTableSeeder extends Seeder
                 'created_at' => '2020-04-16 00:55:58',
                 'updated_at' => '2020-04-16 00:55:58',
             ),
-            4 => 
-            array (
+            4 =>
+            array(
                 'id' => 5,
                 'socialite_id' => NULL,
                 'socialite_name' => NULL,
@@ -87,8 +87,8 @@ class UsersTableSeeder extends Seeder
                 'created_at' => '2020-04-16 00:55:58',
                 'updated_at' => '2020-04-16 00:55:58',
             ),
-            5 => 
-            array (
+            5 =>
+            array(
                 'id' => 6,
                 'socialite_id' => NULL,
                 'socialite_name' => NULL,
@@ -101,8 +101,8 @@ class UsersTableSeeder extends Seeder
                 'created_at' => '2020-04-16 00:55:58',
                 'updated_at' => '2020-04-16 00:55:58',
             ),
-            6 => 
-            array (
+            6 =>
+            array(
                 'id' => 7,
                 'socialite_id' => NULL,
                 'socialite_name' => NULL,
@@ -115,8 +115,8 @@ class UsersTableSeeder extends Seeder
                 'created_at' => '2020-04-16 00:55:58',
                 'updated_at' => '2020-04-16 00:55:58',
             ),
-            7 => 
-            array (
+            7 =>
+            array(
                 'id' => 8,
                 'socialite_id' => NULL,
                 'socialite_name' => NULL,
@@ -129,8 +129,8 @@ class UsersTableSeeder extends Seeder
                 'created_at' => '2020-04-16 00:55:58',
                 'updated_at' => '2020-04-16 00:55:58',
             ),
-            8 => 
-            array (
+            8 =>
+            array(
                 'id' => 9,
                 'socialite_id' => NULL,
                 'socialite_name' => NULL,
@@ -143,8 +143,8 @@ class UsersTableSeeder extends Seeder
                 'created_at' => '2020-04-16 00:55:58',
                 'updated_at' => '2020-04-16 00:55:58',
             ),
-            9 => 
-            array (
+            9 =>
+            array(
                 'id' => 10,
                 'socialite_id' => NULL,
                 'socialite_name' => NULL,
@@ -157,8 +157,8 @@ class UsersTableSeeder extends Seeder
                 'created_at' => '2020-04-16 00:55:58',
                 'updated_at' => '2020-04-16 00:55:58',
             ),
-            10 => 
-            array (
+            10 =>
+            array(
                 'id' => 11,
                 'socialite_id' => NULL,
                 'socialite_name' => NULL,
@@ -172,7 +172,5 @@ class UsersTableSeeder extends Seeder
                 'updated_at' => '2020-04-16 00:55:58',
             ),
         ));
-        
-        
     }
 }

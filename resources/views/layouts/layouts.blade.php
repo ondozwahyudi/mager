@@ -150,5 +150,6 @@
 	<!--begin::Page Scripts(used by this page) -->
 	<script src="{{asset('')}}/assets/js/demo1/pages/dashboard.js" type="text/javascript"></script>
 	<script src="{{asset('')}}/assets/js/demo1/pages/components/extended/blockui.js" type="text/javascript"></script>
+	@yield('js')
 	</body>
 </html>
