@@ -26,5 +26,6 @@ Route::get('redirect/{driver}', 'Auth\LoginController@redirectToProvider')->name
 Route::get('{driver}/callback', 'Auth\LoginController@handleProviderCallback')->name('login.callback');
 Route::get('home', 'HomeController@index')->name('home');
 Route::get('home/{uuid}', 'HomeController@show')->name('home.show');
+Route::post('home/store', 'HomeController@store')->name('home.store');
 Route::group(['middleware' => ['verified']], function () {
 });

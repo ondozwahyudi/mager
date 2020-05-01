@@ -81,7 +81,7 @@
         <div class="row" id="myCard">
             @foreach ($kelas as $kls )
             {{-- @foreach ($kls as $item) --}}
-            @foreach ($kls->kelas as $value)
+            @foreach ($kls['kelas'] as $value)
                 <div class="col-lg-3" id="myBody" >
                     <!--begin:: Widgets/Blog-->
                     <div class="kt-portlet kt-portlet--height-fluid kt-widget19" id="">
@@ -103,15 +103,19 @@
                                     </div>
                                     <div class="kt-widget19__info">
                                         <a href="#" class="kt-widget19__username">
-                                            {{$value->created_by}}
+                                            {{$value['nama_guru']}}
                                         </a>
                                         <span class="kt-widget19__time">
-                                           {{$value->mapel}}
+                                           {{$value['mapel']}}
                                         </span>
                                     </div>
                                     <div class="kt-widget19__stats">
                                         <span class="kt-widget19__number kt-font-brand">
-                                            {{$value->user->count()}}
+                                            @if (!empty($value['siswa']))
+                                            {{ $value['siswa']}}
+                                            @else
+                                                0
+                                            @endif
                                         </span>
                                         <a href="#" class="kt-widget19__comment">
                                             Siswa
@@ -122,7 +126,7 @@
                                 </div>
                             </div>
                             <div class="kt-widget19__action">
-                                <a href="{{route('home.show',  $value->uuid)}}" class="btn btn-sm btn-label-brand btn-bold">Lihat Kelas</a>
+                                <a href="{{route('home.show',  $value['uuid'])}}" class="btn btn-sm btn-label-brand btn-bold">Lihat Kelas</a>
                             </div>
                         </div>
                     </div>
@@ -144,26 +148,27 @@
                         <span aria-hidden="true">×</span>
                     </button>
                 </div>
-                <div class="modal-body">
-                    <form>
+                <form method="post" action="{{ route('home.store') }}" autocomplete="off">
+                    @csrf
+                    <div class="modal-body">
                         <div class="form-group">
                             <label>Nama Kelas (Wajib)</label>
-                            <input type="text" class="form-control"  placeholder="Kelas">
+                            <input type="text" class="form-control"  placeholder="Kelas" name="nama_kelas">
                         </div>
                         <div class="form-group">
                             <label>Mata Pelajaran</label>
-                            <input type="text" class="form-control"  placeholder="Mata Pelajaran">
+                            <input type="text" class="form-control"  placeholder="Mata Pelajaran" name="mapel">
                         </div>
                         <div class="form-group">
                             <label>Ruang</label>
-                            <input type="text" class="form-control"  placeholder="Ruang">
+                            <input type="text" class="form-control"  placeholder="Ruang" name="ruang">
                         </div>
-                    </form>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary" id="kt_blockui_4_4">Block modal</button>
-                </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary" id="kt_blockui_4_4">Add</button>
+                    </div>
+                </form>
             </div>
         </div>
     </div>
