@@ -19,7 +19,7 @@ class CreateKelasUserTable extends Migration
             $table->unsignedBigInteger('user_id');
             $table->enum('status', [0, 1]);
             $table->timestamps();
-            $table->foreign('kelas_id')->references('id')->on('kelas');
+            $table->foreign('kelas_id')->references('id')->on('kelas')->onDelete('cascade');
             $table->foreign('user_id')->references('id')->on('users');
         });
     }

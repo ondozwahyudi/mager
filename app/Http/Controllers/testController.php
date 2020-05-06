@@ -11,31 +11,13 @@ class testController extends Controller
 {
     public function test()
     {
-        $kelas = User::where('id', auth()->user()->id)->with(['kelas' => function ($query) {
-            return $query->with('user')->get();
-        }])->get();
-        $map =  $kelas->map(function ($value) {
-            $arr = [];
-            $arr['user_auth'] = $value->name;
-            foreach ($value['kelas'] as $key => $kelas) {
-                $arr['kelas'][$key]['uuid'] = $kelas->uuid;
-                $arr['kelas'][$key]['nama_kelas'] = $kelas->nama_kelas;
-                $arr['kelas'][$key]['mapel'] = $kelas->mapel;
-                $arr['kelas'][$key]['kode_kelas'] = $kelas->kode_kelas;
-                $arr['kelas'][$key]['nama_guru'] = $kelas->created_by;
-                foreach ($kelas->user as $kis => $user) {
-                    if ($kelas->created_by != $user->name) {
-                        $data['kelas'][$key]['siswa'][] = $user;
-                        $arr['kelas'][$key]['siswa'] = count($data['kelas'][$key]['siswa']);
-                    } else {
-                        $arr['kelas'][$key]['photo'] = $user->photo;
-                    }
-                }
-            }
-            return $arr;
-        });
-        return $map;
-
-        return $kelas;
+        // $kelas = kelas::where('kode_kelas', 'BEJ3hph')->first();
+        // $user =  User::find(auth()->user()->id);
+        // if ($user->kelas()->where('kelas_id', $kelas->id)->exists()) {
+        //     echo "data sudah ada";
+        // } else {
+        //     $user->kelas()->attach($kelas);
+        //     echo "berhasil";
+        // }
     }
 }

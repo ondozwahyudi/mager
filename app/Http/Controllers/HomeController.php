@@ -28,6 +28,7 @@ class HomeController extends Controller
     public function index()
     {
         $kelas = self::guru();
+        // return $kelas;
         return view('home', compact('kelas'));
     }
 
@@ -36,6 +37,7 @@ class HomeController extends Controller
         $kelas = User::where('id', auth()->user()->id)->with(['kelas' => function ($query) {
             return $query->with('user')->get();
         }])->get();
+
         $map =  $kelas->map(function ($value) {
             $arr = [];
             $arr['user_auth'] = $value->name;
@@ -57,6 +59,8 @@ class HomeController extends Controller
             return $arr;
         });
         return $map;
+
+        // return $kelas;
     }
 
     public function show($uuid)
