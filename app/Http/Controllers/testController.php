@@ -21,11 +21,14 @@ class testController extends Controller
                 $arr['kelas'][$key]['uuid'] = $kelas->uuid;
                 $arr['kelas'][$key]['nama_kelas'] = $kelas->nama_kelas;
                 $arr['kelas'][$key]['mapel'] = $kelas->mapel;
+                $arr['kelas'][$key]['kode_kelas'] = $kelas->kode_kelas;
                 $arr['kelas'][$key]['nama_guru'] = $kelas->created_by;
                 foreach ($kelas->user as $kis => $user) {
                     if ($kelas->created_by != $user->name) {
                         $data['kelas'][$key]['siswa'][] = $user;
                         $arr['kelas'][$key]['siswa'] = count($data['kelas'][$key]['siswa']);
+                    } else {
+                        $arr['kelas'][$key]['photo'] = $user->photo;
                     }
                 }
             }
@@ -33,6 +36,6 @@ class testController extends Controller
         });
         return $map;
 
-        // return $kelas;
+        return $kelas;
     }
 }

@@ -91,15 +91,20 @@
                                 </h3>
                                 <div class="kt-widget19__shadow"></div>
                                 <div class="kt-widget19__labels">
-                                    <a href="#" class="btn btn-label-light-o2 btn-bold btn-sm ">Recent</a>
                                 </div>
                             </div>
                         </div>
                         <div class="kt-portlet__body">
-                            <div class="kt-widget19__wrapper">
+                            <div class="kt-widget19__wrapper" style="margin:0px">
                                 <div class="kt-widget19__content">
                                     <div class="kt-widget19__userpic">
-                                        <img src="./assets/media//users/user1.jpg" alt="">
+                                        @if (auth()->user()->name != $value['nama_guru'] )
+                                            @if ($value['photo'] != null)
+                                            <img src="{{$value['photo']}}" alt="">
+                                            @else
+                                            <span class="kt-badge kt-badge--unified-primary kt-badge--xl kt-badge--bold">{{ substr($value['nama_guru'],0,1) }}</span>
+                                        @endif
+                                        @endif
                                     </div>
                                     <div class="kt-widget19__info">
                                         <a href="#" class="kt-widget19__username">
@@ -121,12 +126,18 @@
                                             Siswa
                                         </a>
                                     </div>
+
                                 </div>
-                                <div class="kt-widget19__text">
+                                <div class="kt-widget19__content" style="margin:0px">
+                                    <div class="kt-widget19__info">
+                                        <span class="kt-widget19">
+                                        <b>Kode:</b>  {{$value['code']}}
+                                        </span>
+                                    </div>
+                                    <div class="kt-widget19__stats">
+                                        <a href="{{route('home.show',  $value['uuid'])}}" class="btn btn-sm btn-label-brand btn-bold text-right">Lihat Kelas</a>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="kt-widget19__action">
-                                <a href="{{route('home.show',  $value['uuid'])}}" class="btn btn-sm btn-label-brand btn-bold">Lihat Kelas</a>
                             </div>
                         </div>
                     </div>
@@ -185,5 +196,6 @@
                 });
             });
         });
+
     </script>
 @endsection

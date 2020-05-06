@@ -56,7 +56,7 @@
                         <div class="kt-header__topbar-wrapper" data-toggle="dropdown" data-offset="0px,0px">
                             <div class="kt-header__topbar-user">
                                 <span class="kt-header__topbar-welcome kt-hidden-mobile">Hi,</span>
-                                 <span class="kt-header__topbar-username kt-hidden-mobile"></span>
+                                <span class="kt-header__topbar-username kt-hidden-mobile"></span>
                                 <span class="kt-badge kt-badge--username kt-badge--unified-success kt-badge--lg kt-badge--rounded kt-badge--bold active">
                                     @if(auth()->user()->photo)
                                         <img class="" alt="Pic" src="{{ auth()->user()->photo }}" />

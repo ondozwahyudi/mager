@@ -44,10 +44,13 @@ class HomeController extends Controller
                 $arr['kelas'][$key]['nama_kelas'] = $kelas->nama_kelas;
                 $arr['kelas'][$key]['mapel'] = $kelas->mapel;
                 $arr['kelas'][$key]['nama_guru'] = $kelas->created_by;
+                $arr['kelas'][$key]['code'] = $kelas->kode_kelas;
                 foreach ($kelas->user as $kis => $user) {
                     if ($kelas->created_by != $user->name) {
                         $data['kelas'][$key]['siswa'][] = $user;
                         $arr['kelas'][$key]['siswa'] = count($data['kelas'][$key]['siswa']);
+                    } else {
+                        $arr['kelas'][$key]['photo'] = $user->photo;
                     }
                 }
             }
