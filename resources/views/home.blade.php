@@ -1,7 +1,6 @@
-
 @extends('layouts.layouts')
-
 @section('content')
+
 <div class="kt-grid__item kt-grid__item--fluid kt-grid kt-grid--hor">
     <div class="kt-subheader   kt-grid__item" id="kt_subheader">
         <div class="kt-subheader__main">
@@ -21,7 +20,8 @@
                                     <path d="M14.2928932,16.7071068 C13.9023689,16.3165825 13.9023689,15.6834175 14.2928932,15.2928932 C14.6834175,14.9023689 15.3165825,14.9023689 15.7071068,15.2928932 L19.7071068,19.2928932 C20.0976311,19.6834175 20.0976311,20.3165825 19.7071068,20.7071068 C19.3165825,21.0976311 18.6834175,21.0976311 18.2928932,20.7071068 L14.2928932,16.7071068 Z" id="Path-2" fill="#000000" fill-rule="nonzero" opacity="0.3" />
                                     <path d="M11,16 C13.7614237,16 16,13.7614237 16,11 C16,8.23857625 13.7614237,6 11,6 C8.23857625,6 6,8.23857625 6,11 C6,13.7614237 8.23857625,16 11,16 Z M11,18 C7.13400675,18 4,14.8659932 4,11 C4,7.13400675 7.13400675,4 11,4 C14.8659932,4 18,7.13400675 18,11 C18,14.8659932 14.8659932,18 11,18 Z" id="Path" fill="#000000" fill-rule="nonzero" />
                                 </g>
-                            </svg> </span>
+                            </svg> 
+                        </span>
                     </div>
                     <div class="dropdown-menu dropdown-menu-fit dropdown-menu-right dropdown-menu-anim dropdown-menu-lg">
                         <div class="kt-quick-search kt-quick-search--inline" id="kt_quick_search_inline">
@@ -56,7 +56,7 @@
                             <li class="kt-nav__separator">
                             </li>
                             <li class="kt-nav__item">
-                                <a href="#" class="kt-nav__link" >
+                                <a href="#" class="kt-nav__link" data-toggle="modal" data-target="#modal_kode">
                                     <i class="kt-nav__link-icon flaticon2-drop"></i>
                                     <span class="kt-nav__link-text">Gabung Ke Kelas</span>
                                 </a>
@@ -85,12 +85,46 @@
                 @foreach ($kls['kelas'] as $value)
                     <div class="col-lg-3" id="myBody" >
                         <!--begin:: Widgets/Blog-->
+                      
                         <div class="kt-portlet kt-portlet--height-fluid kt-widget19" id="">
                             <div class="kt-portlet__body kt-portlet__body--fit kt-portlet__body--unfill">
                                 <div class="kt-widget19__pic kt-portlet-fit--top kt-portlet-fit--sides" style="min-height: 150px; background-image: url(./assets/media//products/product4.jpg)">
                                     <h3 class="kt-widget19__title kt-font-light">
                                     </h3>
                                     <div class="kt-widget19__shadow"></div>
+                                    <div class="kt-portlet__head" style="border-bottom:none;">
+                                        <div class="kt-portlet__head-label">
+                                            <h3 class="kt-portlet__head-title">
+                                                <b>Kode:</b>  {{$value['code']}}
+                                            </h3>
+                                        </div>
+                                        <div class="kt-portlet__head-toolbar">
+                                            <div class="dropdown dropdown-inline">
+                                                <button type="button" class="btn btn-clean btn-sm btn-icon btn-icon-md" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                    <i class="flaticon-more-1"></i>
+                                                </button>
+                                                <div class="dropdown-menu dropdown-menu-right dropdown-menu-fit dropdown-menu-md" x-placement="bottom-end" style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(32px, 32px, 0px);">
+                                                    <!--begin::Nav-->
+                                                    <ul class="kt-nav">
+                                                        <li class="kt-nav__head">
+                                                            Export Options
+                                                            <i class="flaticon2-information" data-toggle="kt-tooltip" data-placement="right" title="" data-original-title="Click to learn more..."></i>
+                                                        </li>
+                                                        <li class="kt-nav__separator"></li>
+                                                        <li class="kt-nav__item">
+                                                            @if (auth()->user()->name == $value['nama_guru'] )
+                                                                <a href="{{route('home.delete', $value['uuid'])}}" class="kt-nav__link">
+                                                                    <i class="kt-nav__link-icon flaticon2-drop"></i>
+                                                                    <span class="kt-nav__link-text">Hapus</span>
+                                                                </a>
+                                                            @endif
+                                                        </li>
+                                                    </ul>
+                                                    <!--end::Nav-->
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
                                     <div class="kt-widget19__labels">
                                     </div>
                                 </div>
@@ -112,13 +146,13 @@
                                                 {{$value['nama_guru']}}
                                             </a>
                                             <span class="kt-widget19__time">
-                                            {{$value['mapel']}}
+                                                {{$value['mapel']}}
                                             </span>
                                         </div>
                                         <div class="kt-widget19__stats">
                                             <span class="kt-widget19__number kt-font-brand">
-                                                @if (!empty($value['siswa']))
-                                                {{ $value['siswa']}}
+                                                @if (!empty($value['jumlah']))
+                                                    {{ $value['jumlah']}}
                                                 @else
                                                     0
                                                 @endif
@@ -127,11 +161,10 @@
                                                 Siswa
                                             </a>
                                         </div>
-
                                     </div>
                                     <div class="kt-widget19__content" style="margin:0px">
                                         <div class="kt-widget19__info">
-                                            <b>Kode:</b>  {{$value['code']}}
+                                           
                                         </div>
                                         <div class="kt-widget19__stats">
                                             <a href="{{route('home.show',  $value['uuid'])}}" class="btn btn-sm btn-label-brand btn-bold text-right">Lihat Kelas</a>
@@ -141,20 +174,18 @@
                             </div>
                         </div>
                     </div>
-
-                        {{-- @endforeach --}}
                 @endforeach
             @endif
             @endforeach
         </div>
     </div>
 
-    <!-- Modal -->
+    <!-- Modal add kelas-->
     <div class="modal fade" id="kt_blockui_4_4_modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" style="display: none;" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">New message</h5>
+                    <h5 class="modal-title" id="exampleModalLabel">Buat Kelas</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">×</span>
                     </button>
@@ -178,6 +209,31 @@
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                         <button type="submit" class="btn btn-primary" id="kt_blockui_4_4">Add</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    {{-- modal code kalas --}}
+    <div class="modal fade" id="modal_kode" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" style="display: none;" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Masukan Kode Kelas</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                </div>
+                <form method="post" action="{{ route('home.kode') }}" autocomplete="off">
+                    @csrf
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <label>Kode Kelas</label>
+                            <input type="text" class="form-control"  placeholder="Kode Kelas" name="kode">
+                        </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary" id="kt_blockui_4_4">Gabung </button>
                     </div>
                 </form>
             </div>

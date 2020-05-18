@@ -39,6 +39,11 @@ class User extends Authenticatable
 
     public function kelas()
     {
-        return $this->belongsToMany('App\Kelas')->withPivot('status')->withTimestamps();
+        return $this->hasMany('App\Kelas');
+    }
+
+    public function dk()
+    {
+        return $this->hasMany('App\DataKelas');
     }
 }

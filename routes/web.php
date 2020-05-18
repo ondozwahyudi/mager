@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use RealRashid\SweetAlert\Facades\Alert;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,6 +15,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
+    Alert::success('hellow');
     return view('welcome');
 });
 
@@ -27,5 +29,7 @@ Route::get('{driver}/callback', 'Auth\LoginController@handleProviderCallback')->
 Route::get('home', 'HomeController@index')->name('home');
 Route::get('home/{uuid}', 'HomeController@show')->name('home.show');
 Route::post('home/store', 'HomeController@store')->name('home.store');
+Route::post('home/kode', 'HomeController@kode')->name('home.kode');
+Route::get('home/delete/{uuid}', 'HomeController@delete')->name('home.delete');
 Route::group(['middleware' => ['verified']], function () {
 });

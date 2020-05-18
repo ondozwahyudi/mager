@@ -7,10 +7,15 @@ use Illuminate\Database\Eloquent\Model;
 class Kelas extends Model
 {
     protected $fillable = [
-        'uuid', 'nama_kelas', 'mapel', 'ruang', 'kode_kelas', 'created_by'
+        'uuid', 'nama_kelas', 'mapel', 'ruang', 'kode_kelas', 'user_id'
     ];
     public function user()
     {
-        return $this->belongsToMany('App\User')->withPivot('status')->withTimestamps();
+        return $this->belongsTo('App\User');
+    }
+
+    public function dk()
+    {
+        return $this->hasMany('App\DataKelas');
     }
 }

@@ -34,41 +34,48 @@ class HomeController extends Controller
 
     protected function guru()
     {
-        $kelas = User::where('id', auth()->user()->id)->with(['kelas' => function ($query) {
-            return $query->with('user')->get();
-        }])->get();
-
+        $kelas = User::where('id', auth()->user()->id)->with('dk')->get();
+        // return $kelas;
         $map =  $kelas->map(function ($value) {
             $arr = [];
             $arr['user_auth'] = $value->name;
-            foreach ($value['kelas'] as $key => $kelas) {
-                $arr['kelas'][$key]['uuid'] = $kelas->uuid;
-                $arr['kelas'][$key]['nama_kelas'] = $kelas->nama_kelas;
-                $arr['kelas'][$key]['mapel'] = $kelas->mapel;
-                $arr['kelas'][$key]['nama_guru'] = $kelas->created_by;
-                $arr['kelas'][$key]['code'] = $kelas->kode_kelas;
-                foreach ($kelas->user as $kis => $user) {
-                    if ($kelas->created_by != $user->name) {
-                        $data['kelas'][$key]['siswa'][] = $user;
-                        $arr['kelas'][$key]['siswa'] = count($data['kelas'][$key]['siswa']);
-                    } else {
-                        $arr['kelas'][$key]['photo'] = $user->photo;
-                    }
-                }
+            foreach ($value['dk'] as $key => $dk) {
+                $arr['kelas'][$key]['uuid'] = $dk->kelas->uuid;
+                $arr['kelas'][$key]['nama_kelas'] = $dk->kelas->nama_kelas;
+                $arr['kelas'][$key]['mapel'] = $dk->kelas->mapel;
+                $arr['kelas'][$key]['nama_guru'] = $dk->kelas->user->name;
+                $arr['kelas'][$key]['code'] = $dk->kelas->kode_kelas;
+                $arr['kelas'][$key]['jumlah'] = $dk->kelas->dk->count();
+                $arr['kelas'][$key]['photo'] = $dk->kelas->user->photo;
             }
             return $arr;
         });
         return $map;
-
         // return $kelas;
+    }
+
+    public function kode(Request $request)
+    {
+        $kode = $request->kode;
+        $kelas = kelas::where('kode_kelas', $kode)->first();
+        if (!empty($kelas)) {
+            $user =  User::find(auth()->user()->id);
+            if ($user->kelas()->where('kelas_id', $kelas->id)->exists()) {
+                return back()->with('error', 'Task Created Successfully!');
+            } else {
+                $user->kelas()->attach($kelas);
+                return back()->with('success', 'Kelas telah berhasil ditambahkan!');
+            }
+        } else {
+            return back()->with('info', 'Kode Kelas Tidak di Temikan!');
+        }
     }
 
     public function show($uuid)
     {
-        $kelas = User::where('id', auth()->user()->id)->with(['kelas' => function ($query) use ($uuid) {
-            return $query->where('uuid', $uuid)->with('user')->get();
-        }])->get();
-        return $kelas[0]->kelas;
+        $kelas = Kelas::where('uuid', $uuid)->with('user')->first();
+
+        return view('kelas.kls_show', compact('kelas'));
     }
 
     public function store(request $request)
@@ -86,5 +93,13 @@ class HomeController extends Controller
 
         // return $arr;
         return back()->with('success', 'berhasil ditambahkan!');
+    }
+
+    public function delete($uuid)
+    {
+        $kelas = kelas::where('uuid', $uuid)->firstOrfail();
+        $kelas->delete();
+
+        return back()->with('succces', 'Data Transaksi telah berhasil dihapus!');
     }
 }
