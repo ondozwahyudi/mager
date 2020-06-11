@@ -206,6 +206,13 @@
                                 <div class="kt-widget3__item">
                                     <div class="kt-widget3__header">
                                         <div class="kt-widget3__user-img">
+                                            <span class="kt-badge kt-badge--unified-success kt-badge--xl kt-badge--bold">
+                                                @if($question->user->photo)
+                                                    <img class="kt-badge kt-badge--unified-brand kt-badge--xl" alt="image" src="{{ $question->user->photo }}" />
+                                                @else
+                                                    {{ substr($question->user->name,0,1) }}
+                                                @endif
+                                            </span>
                                             <img class="kt-widget3__img" src="{{$question->user->photo}}" alt="">
                                         </div>
                                         <div class="kt-widget3__info">
