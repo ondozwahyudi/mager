@@ -23,7 +23,6 @@
 		</script>
 
 		<!--end::Fonts -->
-
 		<!--begin::Page Vendors Styles(used by this page) -->
 		<link href="{{asset('')}}/assets/vendors/custom/fullcalendar/fullcalendar.bundle.css" rel="stylesheet" type="text/css" />
 
@@ -119,33 +118,21 @@
 				}
 			};
 		</script>
-	<!--begin:: Global Mandatory Vendors -->
+    <!--begin:: Global Mandatory Vendors -->
 	<script src="{{asset('')}}/assets/vendors/general/jquery/dist/jquery.js" type="text/javascript"></script>
 	<script src="{{asset('')}}/assets/vendors/general/popper.js/dist/umd/popper.js" type="text/javascript"></script>
 	<script src="{{asset('')}}/assets/vendors/general/bootstrap/dist/js/bootstrap.min.js" type="text/javascript"></script>
 	<script src="{{asset('')}}/assets/vendors/general/js-cookie/src/js.cookie.js" type="text/javascript"></script>
 	<script src="{{asset('')}}/assets/vendors/general/moment/min/moment.min.js" type="text/javascript"></script>
 	<script src="{{asset('')}}/assets/vendors/general/tooltip.js/dist/umd/tooltip.min.js" type="text/javascript"></script>
-	<script src="{{asset('')}}/assets/vendors/general/perfect-scrollbar/dist/perfect-scrollbar.js" type="text/javascript"></script>
+    <script src="{{asset('')}}/assets/vendors/general/perfect-scrollbar/dist/perfect-scrollbar.js" type="text/javascript"></script>
 	<script src="{{asset('')}}/assets/vendors/general/sticky-js/dist/sticky.min.js" type="text/javascript"></script>
 	<script src="{{asset('')}}/assets/vendors/general/wnumb/wNumb.js" type="text/javascript"></script>
-	<script src="{{asset('')}}/assets/vendors/general/sweetalert2/dist/sweetalert2.min.js" type="text/javascript"></script>
-	<!--end:: Global Mandatory Vendors -->
-
-	<!--begin:: Global Optional Vendors -->
 	<script src="{{asset('')}}/assets/vendors/general/jquery-form/dist/jquery.form.min.js" type="text/javascript"></script>
 	<script src="{{asset('')}}/assets/vendors/general/block-ui/jquery.blockUI.js" type="text/javascript"></script>
-	<!--end:: Global Optional Vendors -->
-
-	<!--begin::Global Theme Bundle(used by all pages) -->
-	<!--end::Global Theme Bundle -->
-
-	<!--begin::Page Vendors(used by this page) -->
-	<!--begin::Page Scripts(used by this page) -->
-	<script src="{{asset('')}}/assets/js/demo1/sweetalert2.js" type="text/javascript"></script>
 	<script src="{{asset('')}}/assets/vendors/custom/fullcalendar/fullcalendar.bundle.js" type="text/javascript"></script>
-	<script src="//maps.google.com/maps/api/js?key=AIzaSyBTGnKT7dt597vo9QgeQ7BFhvSRP4eiMSM" type="text/javascript"></script>
-	<script src="{{asset('')}}/assets/vendors/custom/gmaps/gmaps.js" type="text/javascript"></script>
+
+
 	@yield('js')
 	</body>
 </html>

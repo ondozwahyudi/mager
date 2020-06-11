@@ -14,6 +14,13 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
+// Route::middleware('auth:api')->get('/user', function (Request $request) {
+//     return $request->user();
+// });
+
+Route::prefix('json')->as('json.')->group(function () {
+    Route::prefix('get')->group(function () {
+        Route::post('questions_edit', 'QuestionsController@json_edit')->name('questionsEdit');
+        Route::post('answers_edit', 'AnswersController@json_edit')->name('answersEdit');
+    });
 });

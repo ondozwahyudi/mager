@@ -4,28 +4,12 @@
 <div class="kt-grid__item kt-grid__item--fluid kt-grid kt-grid--hor">
     <div class="kt-subheader   kt-grid__item" id="kt_subheader">
         <div class="kt-subheader__main">
-            <h3 class="kt-subheader__title">
-
+        <h3 class="kt-subheader__title">
+            <a href="{{route('home.show', $kelas)}}" class="btn btn-primary btn-light"> Back</a>
             </h3>
             <span class="kt-subheader__separator kt-hidden"></span>
         </div>
-        <div class="kt-subheader__main">
-            <div id="kt_header_menu" class="kt-header-menu kt-header-menu-mobile  kt-header-menu--layout-default ">
-                <ul class="kt-menu__nav ">
-                    <li class="kt-menu__item" aria-haspopup="true">
-                        <a href="{{route('home.show', $kelas->uuid)}}" class="btn {!! Request::is('kelas/*') ? ' kt-subheader__btn-primary active ' : '' !!}  ">
-                            <span class="kt-menu__link-text">Home</span>
-                        </a>
-                    </li>
-                    <li class="kt-menu__item" aria-haspopup="true">
-                        <a href="{{route('siswa.index', [$kelas->id, $kelas->uuid])}}" class="btn {!! Request::is('siswa/*') ? ' kt-subheader__btn-primary active ' : '' !!}  ">
-                            <span class="kt-menu__link-text">Siswa</span>
-                        </a>
-                    </li>
-                </ul>
-            </div>
-            <span class="kt-subheader__separator kt-hidden"></span>
-        </div>
+
         <div class="kt-subheader__toolbar">
             <div class="kt-subheader__wrapper">
                 <div class="dropdown dropdown-inline kt-header__topbar-item--search dropdown" id="kt_quick_search_toggle">
@@ -71,114 +55,28 @@
     <div class="container">
         <div class="kt-content  kt-grid__item kt-grid__item--fluid" id="kt_content">
             <div class="row">
-                <div class="col-md-3">
-                    <div class="kt-portlet kt-portlet--tab">
-                        <div class="kt-portlet__head">
-                            <div class="kt-portlet__head-label">
-                                <span class="kt-portlet__head-icon kt-hide">
-                                    <i class="la la-gear"></i>
-                                </span>
-                                <h4 class="kt-portlet__head-title">
-                                    Batas Waktu
-                                </h4>
-                            </div>
-                        </div>
-                        <div class="kt-portlet__body">
-                            {{-- <div class="kt-section">
-                                <div class="form-group form-group-last">
-                                    <label for="exampleTextarea">Body</label>
-                                    <textarea class="form-control" id="exampleTextarea" rows="3"></textarea>
-                                </div>
-                            </div>
-
-                            <div class="kt-section">
-
-                            </div> --}}
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-md-9">
-                    <div class="kt-section">
-                        <div class="kt-portlet kt-portlet--tab">
-                            <ul class="kt-nav kt-nav--active-bg" id="kt_nav" role="tablist">
-                                <li class="kt-nav__item kt-nav__item--active">
-                                    <a class="kt-nav__link  collapsed" role="tab" id="kt_nav_link_2" data-toggle="collapse" href="#questions" aria-expanded="  false">
-                                        <div class="kt-portlet__head" style="padding:0px; border-bottom:none;">
-                                            <div class="kt-portlet__head-label">
-
-                                                <span class="kt-badge kt-badge--unified-success kt-badge--xl kt-badge--bold">
-                                                    @if(auth()->user()->photo)
-                                                        <img class="kt-badge kt-badge--unified-brand kt-badge--xl" alt="image" src="{{ auth()->user()->photo }}" />
-                                                    @else
-                                                        {{ substr(auth()->user()->name,0,1) }}
-                                                    @endif
-                                                </span>
-                                                <span class="kt-nav__link-text" style="margin-left:20px;">Bagikan sesatu dengan kelas anda</span>
-                                            </div>
-                                        </div>
-                                    </a>
-
-                                    <ul class="kt-nav__sub collapse" id="questions" role="tabpanel" aria-labelledby="m_nav_link_2" data-parent="#kt_nav">
-                                        <form action="{{ route('questions.store', $kelas->id)}}" method="post">
-                                            @csrf
-                                            <div class="kt-portlet__body">
-                                                <div class="kt-section">
-                                                    <div class="form-group form-group-last">
-                                                        <label for="exampleTextarea">Title</label>
-                                                        <input type="text" name="title" value="" id="question-title" class="form-control {{ $errors->has('title') ? 'is-invalid' : '' }} ">
-                                                        @if ($errors->has('title'))
-                                                            <div class="invalid-feedback">
-                                                                <strong> {{$errors->first('title')}} </strong>
-                                                            </div>
-                                                        @endif
-                                                    </div>
-
-                                                    <div class="form-group form-group-last">
-                                                        <label for="exampleTextarea">Body</label>
-                                                        <textarea name="body" id="question-body" rows="10" class="form-control {{ $errors->has('body') ? 'is-invalid' : '' }} "></textarea>
-                                                        @if ($errors->has('body'))
-                                                            <div class="invalid-feedback">
-                                                                <strong> {{$errors->first('body')}} </strong>
-                                                            </div>
-                                                        @endif
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="kt-portlet__foot">
-                                                <div class="kt-form__actions">
-                                                    <button type="submit" class="btn btn-primary">Submit</button>
-                                                    <button type="reset" class="btn btn-secondary">Cancel</button>
-                                                </div>
-                                            </div>
-                                        </form>
-                                    </ul>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-
-                    @foreach ($questions as $question)
+                <div class="col">
                     <div class="kt-portlet " id="datatable-basic">
                         <div class="kt-portlet__head">
                             <div class="kt-portlet__head-label">
                                 <h3 class="kt-portlet__head-title">
-                                    <a href="{{route('kelas.questions.show', [$kelas->uuid, $question->uuid])}}">{{$question->title}}</a>
+                                    <a href="#">{{$question->title}}</a>
                                 </h3>
                             </div>
-                            @if (auth()->user()->name == $question->user->name )
                             <div class="kt-portlet__head-toolbar">
                                 <div class="dropdown dropdown-inline">
+                                    @if (auth()->user()->name == $question->user->name )
                                     <button type="button" class="btn btn-clean btn-sm btn-icon-md btn-icon" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                         <i class="flaticon-more-1"></i>
                                     </button>
                                     <div class="dropdown-menu dropdown-menu-right dropdown-menu-fit dropdown-menu-md">
+
+                                        <!--begin::Nav-->
                                         <ul class="kt-nav">
                                             <li class="kt-nav__head">
                                                 Export Options
                                                 <i class="flaticon2-information" data-toggle="kt-tooltip" data-placement="right" title="" data-original-title="Click to learn more..."></i>
                                             </li>
-
                                             <li class="kt-nav__separator"></li>
                                             <li class="kt-nav__item">
                                                 <a href="#" class="kt-nav__link editQuestions" data-uuid="{{$question->uuid}}" data-toggle="modal" data-target="#editQuestions">
@@ -186,19 +84,16 @@
                                                     <span class="kt-nav__link-text">Edit</span>
                                                 </a>
                                             </li>
-
-                                            <li class="kt-nav__item">
-                                            </li>
-
                                         </ul>
+                                        <!--end::Nav-->
                                     </div>
-                                    <a href="{{route('questions.delete', [$question->uuid])}}" class="kt-nav__link" onclick="return confirm('Are you sure?')">
+                                    {{-- <a href="{{route('questions.delete', [$question->uuid])}}" class="kt-nav__link" onclick="return confirm('Are you sure?')">
                                         <i class="kt-nav__link-icon flaticon2-drop"></i>
                                         <span class="kt-nav__link-text">Hapus</span>
-                                    </a>
+                                    </a> --}}
+                                    @endif
                                 </div>
                             </div>
-                            @endif
                         </div>
 
                         <div class="kt-portlet__body">
@@ -229,8 +124,134 @@
                             </div>
                         </div>
                     </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-9">
+
+                    @foreach ($question->answers as $answer)
+                    <div class="kt-portlet " id="datatable-basic">
+                        <div class="kt-portlet__head">
+                            <div class="kt-portlet__head-label">
+                                <h3 class="kt-portlet__head-title">
+                                </h3>
+                            </div>
+                            @if (auth()->user()->name == $answer->user->name )
+                            <div class="kt-portlet__head-toolbar">
+                                <div class="dropdown dropdown-inline">
+
+                                    <a href="{{route("kelas.questions.answers.edit", [$kelas, $question->uuid ,$answer->id]) }}" class="editQuestions btn btn-primary" >
+                                        <span class="kt-nav__link-text">Edit</span>
+                                    </a>
+                                    <a href="{{route('answers.delete', $answer->id)}}" class="kt-nav__link btn btn-danger" onclick="return confirm('Are you sure?')">
+                                        <span class="kt-nav__link-text">Hapus</span>
+                                    </a>
+                                </div>
+                            </div>
+                            @endif
+                        </div>
+
+                        <div class="kt-portlet__body">
+                            <div class="kt-widget3">
+                                <div class="kt-widget3__item">
+                                    <div class="kt-widget3__header">
+                                        <div class="kt-widget3__user-img">
+                                            <span class="kt-badge kt-badge--unified-success kt-badge--xl kt-badge--bold">
+                                            @if($answer->user->photo)
+                                            <img class="kt-badge kt-badge--unified-brand kt-badge--xl" alt="image" src="{{$answer->user->photo}}"" />
+                                            @else
+                                                {{ substr($answer->user->name,0,1) }}
+                                            @endif
+                                            </span>
+                                        </div>
+                                        <div class="kt-widget3__info">
+                                            <a href="{{ $answer->user->url }}" class="kt-widget3__username">
+                                                {{ $answer->user->name }}
+                                            </a><br>
+                                            <span class="kt-widget3__time">
+                                                <small class="text-muted">{{ $answer->created_date}}</small>
+                                            </span>
+                                        </div>
+                                        <span class="kt-widget3__status kt-font-info">
+
+                                        </span>
+                                    </div>
+                                    <div class="kt-widget3__body">
+                                        <p class="kt-widget3__text" style="color: black;">
+                                            {!! $answer->body_html !!}
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                     @endforeach
-                    {{ $questions->links() }}
+                    <div class="kt-section">
+                        <div class="kt-portlet kt-portlet--tab">
+                            <ul class="kt-nav kt-nav--active-bg" id="kt_nav" role="tablist">
+                                <li class="kt-nav__item kt-nav__item--active">
+                                    <a class="kt-nav__link  collapsed" role="tab" id="kt_nav_link_2" data-toggle="collapse" href="#questions" aria-expanded="  false">
+                                        <div class="kt-portlet__head" style="padding:0px; border-bottom:none;">
+                                            <div class="kt-portlet__head-label">
+
+                                                <span class="kt-badge kt-badge--unified-success kt-badge--xl kt-badge--bold">
+                                                    @if(auth()->user()->photo)
+                                                        <img class="kt-badge kt-badge--unified-brand kt-badge--xl" alt="image" src="{{ auth()->user()->photo }}" />
+                                                    @else
+                                                        {{ substr(auth()->user()->name,0,1) }}
+                                                    @endif
+                                                </span>
+
+                                                <span class="kt-nav__link-text" style="margin-left:20px;">Bagikan sesatu dengan kelas anda</span>
+                                            </div>
+                                        </div>
+                                    </a>
+
+                                    <ul class="kt-nav__sub collapse" id="questions" role="tabpanel" aria-labelledby="m_nav_link_2" data-parent="#kt_nav">
+                                        <form action="{{ route('kelas.questions.answers.store', [$kelas, $question->id] )}}" method="post">
+                                            @csrf
+                                            <div class="kt-portlet__body">
+                                                <div class="kt-section">
+                                                    <div class="form-group form-group-last">
+                                                        <label for="exampleTextarea">Body</label>
+                                                        <textarea name="body" id="question-body" rows="10" class="form-control {{ $errors->has('body') ? 'is-invalid' : '' }} "></textarea>
+                                                        @if ($errors->has('body'))
+                                                            <div class="invalid-feedback">
+                                                                <strong> {{$errors->first('body')}} </strong>
+                                                            </div>
+                                                        @endif
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="kt-portlet__foot">
+                                                <div class="kt-form__actions">
+                                                    <button type="submit" class="btn btn-primary">Submit</button>
+                                                    <button type="reset" class="btn btn-secondary">Cancel</button>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="col-md-3">
+                    <div class="kt-portlet kt-portlet--tab">
+                        <div class="kt-portlet__head">
+                            <div class="kt-portlet__head-label">
+                                <span class="kt-portlet__head-icon kt-hide">
+                                    <i class="la la-gear"></i>
+                                </span>
+                                <h4 class="kt-portlet__head-title">
+                                    Batas Waktu
+                                </h4>
+                            </div>
+                        </div>
+                        <div class="kt-portlet__body">
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -274,7 +295,6 @@
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                         <button type="submit" class="btn btn-primary" id="kt_blockui_4_4">update</button>
                     </div>
-
                 </form>
             </div>
         </div>
@@ -282,10 +302,9 @@
 @endsection
 @section('js')
 <script>
+
     $('#datatable-basic').on('click', '.editQuestions', function() {
         var $uuid = $(this).attr('data-uuid');
-        var $uuidK = "{{$kelas->uuid}}";
-        $(".modal-content form").attr("action",$uuidK +"/"+ "questions" +"/"+ $uuid );
         $.ajax({
             type: "POST",
             url: "{{ route('json.questionsEdit') }}",
@@ -297,8 +316,6 @@
             success: function(data) {
                 $("#question-titleUpdate").val(data.title);
                 $("#question-bodyUpdate").val(data.body);
-
-            // console.log(data);
             }
         });
     });

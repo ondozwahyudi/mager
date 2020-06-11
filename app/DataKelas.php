@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use App\Questions;
 
 class DataKelas extends Model
 {
@@ -19,4 +20,5 @@ class DataKelas extends Model
     {
         return $this->belongsTo('App\User');
     }
+
 }

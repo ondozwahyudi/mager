@@ -18,4 +18,9 @@ class Kelas extends Model
     {
         return $this->hasMany('App\DataKelas');
     }
+
+    public function questions()
+    {
+        return $this->hasMany(Questions::class);
+    }
 }

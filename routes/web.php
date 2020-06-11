@@ -26,10 +26,17 @@ Route::get('/test', 'testController@test');
 
 Route::get('redirect/{driver}', 'Auth\LoginController@redirectToProvider')->name('login.provider');
 Route::get('{driver}/callback', 'Auth\LoginController@handleProviderCallback')->name('login.callback');
-Route::get('home', 'HomeController@index')->name('home');
-Route::get('home/{uuid}', 'HomeController@show')->name('home.show');
 Route::post('home/store', 'HomeController@store')->name('home.store');
 Route::post('home/kode', 'HomeController@kode')->name('home.kode');
 Route::get('home/delete/{uuid}', 'HomeController@delete')->name('home.delete');
-Route::group(['middleware' => ['verified']], function () {
-});
+Route::get('home', 'HomeController@index')->name('home');
+Route::get('kelas/{uuid}', 'HomeController@show')->name('home.show');
+Route::get('siswa/{id}/{uuid}', 'HomeController@dkSiswa')->name('siswa.index');
+
+Route::post('kelas/{uuid}/questions', 'QuestionsController@store')->name('questions.store');
+Route::get('questions/delete/{uuid}', 'QuestionsController@delete')->name('questions.delete');
+Route::get('answers/delete/{id}', 'AnswersController@delete')->name('answers.delete');
+
+Route::resource('kelas.questions', 'QuestionsController');
+Route::resource('kelas.questions.answers', 'AnswersController');
+
