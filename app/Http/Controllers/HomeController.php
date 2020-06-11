@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Repository\KelasRepositoryInterface;
+use App\Repository\RepositoryInterface;
 use Illuminate\Http\Request;
 use Ramsey\Uuid\Uuid;
 use Illuminate\Support\Str;
@@ -11,7 +11,7 @@ use Illuminate\Support\Str;
 class HomeController extends Controller
 {
     private $klsRepo;
-    public function __construct(KelasRepositoryInterface $klsRepo)
+    public function __construct(RepositoryInterface $klsRepo)
     {
         $this->middleware('auth');
         $this->klsRepo = $klsRepo;
@@ -38,7 +38,7 @@ class HomeController extends Controller
     public function show($uuid)
     {
         $kelas = $this->klsRepo->show($uuid);
-        return view('kelas.kls_show', compact('kelas'));
+        return $kelas;
     }
 
     public function store(request $request)
@@ -53,14 +53,18 @@ class HomeController extends Controller
                 'user_id' => auth()->user()->id
             ]
         );
-
         return back()->with('success', 'berhasil ditambahkan!');
     }
-
 
     public function delete($uuid)
     {
         $this->klsRepo->delete($uuid);
         return back()->with('succces', 'Data Transaksi telah berhasil dihapus!');
+    }
+
+    public function dkSiswa($id, $uuid)
+    {
+        $kelas = $this->klsRepo->dkSiswa($id, $uuid);
+        return $kelas;
     }
 }

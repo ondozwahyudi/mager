@@ -12,11 +12,12 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
         // $this->call(UserSeeder::class);
-        // factory(App\Kelas::class, 3)->create();
-        // factory(App\User::class, 10)->create();
-        // factory(App\DataKelas::class, 20)->create()->unique();
+
         $this->call(UsersTableSeeder::class);
         $this->call(KelasTableSeeder::class);
         $this->call(DataKelasTableSeeder::class);
+        factory(App\Questions::class, 15)->create();
+        factory(App\Answers::class, 20)->create();
+        // $this->call(KelasQuestionsAnswersTableSeeder::class);
     }
 }

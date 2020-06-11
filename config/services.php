@@ -38,9 +38,9 @@ return [
     ],
 
     'github' => [
-        'client_id' => env('GITHUB_CLIENT_ID'),
-        'client_secret' => env('GITHUB_CLIENT_SECRET'),
-        'redirect' => env('GITHUB_REDIRECT_CALLBACK'),
+        'client_id' => '3d4bc75b3ae0cdea466b',
+        'client_secret' => '04fce4f1acb49ff5f08392d064c4589eebd0425d',
+        'redirect' => 'http://mager.test/github/callback',
     ],
 
 ];
